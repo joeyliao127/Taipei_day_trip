@@ -46,12 +46,12 @@ def insert_attractions_table(attraction_data: list):
 def insert_mrt_table(mrt_data: str, index: int):
     execute_string = "INSERT INTO mrt(id,name) VALUE(%s, %s)"
     execute_Args = [index, mrt_data]
-    # insertData(execute_string, execute_Args)
+    insertData(execute_string, execute_Args)
     
 def insert_category_table(category_data: str, index: int):
     execute_string = "INSERT INTO category(id,name) VALUE(%s,%s)"
     execute_Args = [index,category_data]
-    # insertData(execute_string, execute_Args)
+    insertData(execute_string, execute_Args)
 
     
 def insert_image_table(img_data: str, index: int):
@@ -96,8 +96,6 @@ for item in attractions:
     for url in url_temp_list:
         if(url[-3:] in check_list):
             insert_image_table(img_data= f"https{url}", index= counter)
-            # url_list.append(f"https{url}")
-    # url_list
 
     attraction_table = [
         item["name"],
@@ -111,6 +109,5 @@ for item in attractions:
         counter
     ]
     counter += 1
-        # insert_attractions_table(attraction_table)
-# print(url_list)
-# print(counter)
+    insert_attractions_table(attraction_table)
+
