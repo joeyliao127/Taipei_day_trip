@@ -29,7 +29,6 @@ def connectionDecorator(operationFn):
 @connectionDecorator
 def insertData(cursor, connection, execute_string:str, execute_Args:list):
     try:
-        print(f"args = {execute_Args}")
         cursor.execute(execute_string, execute_Args)
         connection.commit()
         print("插入資料成功")
@@ -39,6 +38,7 @@ def insertData(cursor, connection, execute_string:str, execute_Args:list):
         return False
 
 def insert_attractions_table(attraction_data: list):
+   print("景點Data =", attraction_data)
    execute_string = "INSERT INTO attractions(name, description, address,transport,lng,lat,category, mrt, img) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s)"
    execute_Args = attraction_data
    insertData(execute_string, execute_Args)
@@ -57,7 +57,7 @@ def insert_category_table(category_data: str, index: int):
 def insert_image_table(img_data: str, index: int):
     execute_string = "INSERT INTO image(attraction, url) VALUES(%s, %s)"
     execute_Args = [index, img_data]
-    insertData(execute_string, execute_Args)
+    # insertData(execute_string, execute_Args)
 
 with open(f"data/taipei-attractions.json", mode="r", encoding="utf-8") as file:
     data = json.load(file)
@@ -78,10 +78,7 @@ for item in attractions:
         if(mrt_name):
             mrt_fk.append(mrt_name)
             insert_mrt_table(mrt_data= mrt_name, index=mrt_fk.index(mrt_name)+1)
-        elif(mrt_name == None):
-            mrt_fk.append(None)
-            insert_mrt_table(mrt_data= None, index=mrt_fk.index(None)+1)
-
+            
     if(cat_name not in cat_fk):
         if(cat_name != "其\u3000\u3000他"):
             cat_fk.append(cat_name)
@@ -96,7 +93,10 @@ for item in attractions:
     for url in url_temp_list:
         if(url[-3:] in check_list):
             insert_image_table(img_data= f"https{url}", index= counter)
-
+    try:
+        mrt_index = mrt_fk.index(mrt_name)+1
+    except:
+        mrt_index = None
     attraction_table = [
         item["name"],
         item["description"],
@@ -105,7 +105,7 @@ for item in attractions:
         item["longitude"],
         item["latitude"],
         cat_fk.index(cat_name)+1,
-        mrt_fk.index(mrt_name)+1,            
+        mrt_index,            
         counter
     ]
     counter += 1
