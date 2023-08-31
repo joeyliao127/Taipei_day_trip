@@ -57,7 +57,7 @@ def insert_category_table(category_data: str, index: int):
 def insert_image_table(img_data: str, index: int):
     execute_string = "INSERT INTO image(attraction, url) VALUES(%s, %s)"
     execute_Args = [index, img_data]
-    # insertData(execute_string, execute_Args)
+    insertData(execute_string, execute_Args)
 
 with open(f"data/taipei-attractions.json", mode="r", encoding="utf-8") as file:
     data = json.load(file)
@@ -106,7 +106,6 @@ for item in attractions:
         item["latitude"],
         cat_fk.index(cat_name)+1,
         mrt_index,            
-        counter
     ]
     counter += 1
     insert_attractions_table(attraction_table)
