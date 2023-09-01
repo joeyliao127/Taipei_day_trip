@@ -1,5 +1,6 @@
 from flask import *
 import mysql.connector
+import sys
 app=Flask(
 	__name__,
 	static_folder="public",
@@ -73,8 +74,8 @@ def get_one_attraction(id:int):
 def get_attractions(page, keyword):
 	count = int(page) * 12
 	if(keyword):
-		execute_Str = "select a.id as id, a.name as name, a.description as description, a.address as address, a.transport as transport, a.lat as lat, a.lng as lng, c.name as category, mrt.name as mrt FROM attractions a join category c on c.id = a.category join mrt on mrt.id = a.mrt WHERE a.name LIKE %s LIMIT 12 OFFSET %s"
-		execute_Args = [keyword+"%", count]
+		execute_Str = "select a.id as id, a.name as name, a.description as description, a.address as address, a.transport as transport, a.lat as lat, a.lng as lng, c.name as category, mrt.name as mrt FROM attractions a join category c on c.id = a.category join mrt on mrt.id = a.mrt WHERE a.name LIKE %s OR mrt.name LIKE %s LIMIT 12 OFFSET %s"
+		execute_Args = ["%"+keyword+"%","%"+keyword+"%", count]
 		data = find(execute_Str,execute_Args)
 		query_str = "SELECT count(*) as count FROM attractions WHERE attractions.name LIKE %s"
 		query_args = [keyword+"%"]
