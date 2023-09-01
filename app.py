@@ -15,7 +15,7 @@ dbconfig = {
     "port": 3306,
     "user": "root", 
     "password": "root",
-    "database": "Taipei_Trip",
+    "database": "taipei_trip",
 }
 
 try:
@@ -32,6 +32,7 @@ def find(execute_Str: str, execute_Args=None):
 	try:
 		cursor.execute(execute_Str, execute_Args)
 		result = cursor.fetchall()
+		# print("-----------result---------------\n", result)
 	except Exception as ex:
 		print(f"查詢失敗..\n錯誤訊息：{ex}")
 		return {"error": "查詢失敗"}
@@ -77,9 +78,11 @@ def get_attractions(page, keyword):
 		execute_Str = "select a.id as id, a.name as name, a.description as description, a.address as address, a.transport as transport, a.lat as lat, a.lng as lng, c.name as category, mrt.name as mrt FROM attractions a join category c on c.id = a.category join mrt on mrt.id = a.mrt WHERE a.name LIKE %s OR mrt.name LIKE %s LIMIT 12 OFFSET %s"
 		execute_Args = ["%"+keyword+"%","%"+keyword+"%", count]
 		data = find(execute_Str,execute_Args)
-		query_str = "SELECT count(*) as count FROM attractions WHERE attractions.name LIKE %s"
-		query_args = [keyword+"%"]
+		query_str = "SELECT count(*) as count FROM attractions join mrt m on attractions.mrt = m.id WHERE attractions.name LIKE %s OR m.name LIKE %s"
+		query_args = ["%"+keyword+"%", "%"+keyword+"%"]
 		data_count = find(query_str,query_args)
+		print("=========data count=============")
+		print(data_count)
 		data["count"] = data_count["data"][0]["count"]
 		print(f"counter = {data_count}")
 
@@ -149,7 +152,7 @@ def attraction_page():
 			"nextPage": next_page,
 			"data": data["data"]
 		}	
-		print(f"return data:\n{return_data}")
+		# print(f"return data:\n{return_data}")
 
 		return json.dumps(return_data, ensure_ascii=False),200,{'Content-Type': "application/json; charset=utf-8"}
 
@@ -179,8 +182,6 @@ def api_attractions(attractionId):
 	elif("data" in data):
 		print("/api/att/id回傳的data:\n",data)
 		return json.dumps(data, ensure_ascii=False),200,{'Content-Type': "application/json; charset=utf-8"}
-	
-		
 	
 @app.route("/api/mrts")
 def api_mrts():
