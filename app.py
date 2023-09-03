@@ -1,6 +1,9 @@
 from flask import *
-import mysql.connector
 import sys
+sys.path.append("modules")
+from dbConnector import *
+
+
 app=Flask(
 	__name__,
 	static_folder="public",
@@ -10,23 +13,9 @@ app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
 app.secret_key = "0xffffffff"
 
-dbconfig = {
-    "host": "127.0.0.1",
-    "port": 3306,
-    "user": "root", 
-    "password": "root",
-    "database": "taipei_trip",
-}
-
-try:
-    connectionPool = mysql.connector.pooling.MySQLConnectionPool(pool_name="taipei_trip", pool_size=5, **dbconfig)
-    print("建立connectionPool成功")
-except Exception as ex:
-	print("建立connectionPool失敗...\n錯誤訊息：",ex)
-
          
 def find(execute_Str: str, execute_Args=None):  
-	connection = connectionPool.get_connection()
+	connection = connectDB()
 	cursor = connection.cursor(dictionary=True)
 
 	try:
@@ -99,6 +88,7 @@ def get_attractions(page, keyword):
 	elif("error" in data):
 		print("get_attractions裡面的錯誤訊息：\n",data)
 		return data
+
 
 def get_mrts():
 	execute_Str = "SELECT m.id, m.name, COUNT(a.mrt) AS mrt_count FROM mrt m JOIN attractions a ON m.id = a.mrt GROUP BY m.name ORDER BY mrt_count DESC;"
