@@ -11,7 +11,10 @@ app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
 app.secret_key = "0xffffffff"
 app.register_blueprint(blueprint, url_prefix = "/api")
-
+@app.after_request
+def add_cors_headers(response):
+    response.headers['Access-Control-Allow-Origin'] = "*"
+    return response
 #---------------------------------------------
 # Pages
 @app.route("/")
