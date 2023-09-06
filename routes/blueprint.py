@@ -1,6 +1,5 @@
 import json
 from flask import Blueprint, request
-import packages.dbConnector as DC
 from packages import get_data 
 
 blueprint = Blueprint('blueprint', __name__)

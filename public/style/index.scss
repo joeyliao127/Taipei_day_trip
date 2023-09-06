@@ -80,6 +80,10 @@ header {
   justify-content: center;
   height: 320px;
   background: url("/pic/welcome.png"), lightgray 50% / cover no-repeat;
+  @media (min-width: 360px) and (max-width: 600px) {
+    width: 100%;
+    padding: 10px;
+  }
 }
 
 .slogan {
@@ -109,8 +113,6 @@ header {
   }
   @media (min-width: 1200px) {
     max-width: 1200px;
-  }
-  @media (min-width: 601px) and (man-width: 1199px) {
   }
   @media (min-width: 360px) and (max-width: 600px) {
     width: 100%;
@@ -218,7 +220,7 @@ main {
   }
 }
 .arr-item:first-child {
-  padding: 15px 0 15px 15px;
+  padding: 9px 0 9px 15px;
   .arrow {
     background-image: url("/pic/gray-left.png");
     &:hover {
@@ -228,7 +230,7 @@ main {
 }
 
 .arr-item:last-child {
-  padding: 15px 15px 15px 0;
+  padding: 9px 15px 9px 0;
   .arrow {
     background-image: url("/pic/gray-right.png");
     &:hover {
@@ -254,6 +256,10 @@ main {
   @media (max-width: 600px) {
     grid-template-columns: repeat(1, 1fr);
     grid-template-rows: repeat(12, 1fr);
+    gap: 15px;
+  }
+  div.attractions-item {
+    border: 1px solid #e8e8e8;
   }
 }
 
@@ -268,9 +274,8 @@ main {
   }
   p {
     position: absolute;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.6);
     inset: auto 0 0 0;
-    opacity: 0.6;
     font-size: 20px;
     color: white;
     padding: 10px;
@@ -282,7 +287,6 @@ main {
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  border: 1px solid #e8e8e8;
   border-radius: 5px;
   p {
     line-height: 25px;
@@ -299,8 +303,9 @@ main {
   margin: auto;
   padding: 50px;
   border: 1px gray solid;
-  position: relative;
-  top: -50px;
+  position: absolute;
+  inset: 0;
+
   p {
     margin: auto;
     color: #757575;

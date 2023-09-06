@@ -3,7 +3,14 @@ let mrtList = [];
 let mrtPoint;
 let attNextPage = true;
 let listenMRT;
+
 async function init() {
+  const attractionsResponse = await fetch(
+    "http://44.219.72.138:3000/api/attractions?page=0"
+  );
+  const attracitonJson = await attractionsResponse.json();
+  makeAttractions(attracitonJson);
+
   const mrtResponse = await fetch("http://44.219.72.138:3000/api/mrts");
   const jsonData = await mrtResponse.json();
   mrtList = jsonData["data"];
@@ -15,11 +22,6 @@ async function init() {
   }
   mrtPoint = moveMRT();
 
-  const attractionsResponse = await fetch(
-    "http://44.219.72.138:3000/api/attractions?page=0"
-  );
-  const attracitonJson = await attractionsResponse.json();
-  makeAttractions(attracitonJson);
   listenMRT = document.querySelectorAll(".mrt-ctn p");
   listenMRTList();
 }
@@ -38,32 +40,45 @@ function moveMRT() {
   let countWidth = 0;
   let mrtContentWidth = 0;
   let result = [0];
+  console.log(`total width = ${totalWidth}`);
+  console.log(`當前ctn寬度 = ${ctnWidth}`);
   for (let i = 0; i < mrts.length; i += 1) {
+    console.log(`================${i}================`);
     if (countWidth < ctnWidth) {
+      console.log(`countWidt:${countWidth} < ctnWidth:${ctnWidth}`);
+      console.log(
+        `countWidth開始累加:${mrts[i].offsetWidth}\n當前countWidth = ${countWidth}`
+      );
       mrtContentWidth = mrts[i].offsetWidth;
       countWidth += mrtContentWidth;
+      console.log(`累加後的countWidth = ${countWidth}`);
     } else {
       pointer += countWidth - mrtContentWidth;
+      console.log(
+        `countWidth爆掉了！！ 扣掉上一次item寬度:${mrtContentWidth}的countWidth = ${countWidth}`
+      );
       result.push(pointer);
-      countWidth = mrtContentWidth;
+      console.log(`爆掉後扣掉上一次item的寬 = 座標：reulst = ${result}`);
+      countWidth = mrtContentWidth + mrts[i].offsetWidth;
       continue;
     }
   }
-  console.log(`total width = ${totalWidth}`);
+
   console.log(`result = ${result}`);
   return result;
 }
 
-function makeAttractions(attraciton) {
+function makeAttractions(attraciton, keyword) {
   if (!attraciton.data) {
     console.log(`查無結果`);
-    const main = document.querySelector("main");
+    const ctn = document.querySelector(".attractions-ctn");
+    ctn.setAttribute("style", "padding: 200px;");
     const noResult = document.createElement("div");
     noResult.classList.add("no-result");
     const text = document.createElement("p");
     text.textContent = "查無結果";
     noResult.appendChild(text);
-    main.appendChild(noResult);
+    ctn.appendChild(noResult);
     return 0;
   }
   const attractionsCtn = document.querySelector(".attractions-ctn");
@@ -73,7 +88,7 @@ function makeAttractions(attraciton) {
   for (item of attracitonData) {
     let { name, category, mrt, images } = item;
     let attItem = document.createElement("div");
-    attItem.classList.add("attractions-item");
+    attItem.classList.add("attraction-item");
 
     let attPic = document.createElement("div");
     attPic.classList.add("item-pic");
@@ -101,6 +116,8 @@ function makeAttractions(attraciton) {
 
     attractionsCtn.appendChild(attItem);
   }
+  console.log(`make Attractions: keyword = ${keyword}`);
+  observeListItem(attNextPage, keyword);
 }
 
 function removeAttractions() {
@@ -113,15 +130,14 @@ function removeAttractions() {
 }
 
 function listenMRTList() {
-  console.log(`開始監聽MRT List...`);
   listenMRT.forEach((mrt) => {
     const attraction = mrt.textContent;
     const input = document.querySelector("#search-input");
-    input.textContent = attraction;
     mrt.addEventListener("click", async () => {
-      console.log(`${mrt.textContent}被點擊`);
+      input.value = attraction;
+      console.log(`${attraction}被點擊`);
       const response = await fetch(
-        `http://44.219.72.138:3000/api/attraction/${attraction}`
+        `http://44.219.72.138:3000/api/attractions?page=0&keyword=${attraction}`
       );
       const data = await response.json();
       removeAttractions();
@@ -152,12 +168,55 @@ leftArrow.addEventListener("click", () => {
 });
 
 const searchBtn = document.querySelector("#search-btn");
-const searchInput = document.querySelector("#search-input");
+
 searchBtn.addEventListener("click", async () => {
+  const searchInput = document.querySelector("#search-input");
+  const keyword = searchInput.value;
+  console.log(`監聽serach-btn: keyword = ${keyword}`);
   let attResponse = await fetch(
-    `http://44.219.72.138:3000/api/attractions?page=0&keyword=${searchInput.value}`
+    `http://44.219.72.138:3000/api/attractions?page=0&keyword=${keyword}`
   );
   let searchJson = await attResponse.json();
   removeAttractions();
-  makeAttractions(searchJson);
+  makeAttractions(searchJson, keyword);
 });
+
+async function lazyLoading(nextPage, keyword = null) {
+  console.log(`lazyloading內的keyword = ${keyword}`);
+  if (keyword) {
+    const response = await fetch(
+      `http://44.219.72.138:3000/api/attractions?page=${nextPage}&keyword=${keyword}`
+    );
+    const data = await response.json();
+    makeAttractions(data);
+  } else {
+    const response = await fetch(
+      `http://44.219.72.138:3000/api/attractions?page=${nextPage}`
+    );
+    const data = await response.json();
+    makeAttractions(data);
+  }
+}
+
+function observeListItem(nextPage, keyword) {
+  const attractionItem = document.querySelectorAll(".attraction-item");
+  const observer = new IntersectionObserver((entries) => {
+    let observed = entries[0].isIntersecting;
+    console.log(
+      `obseveListItem:準備觀察，NextPage = ${nextPage}, keyword = ${keyword}`
+    );
+    if (observed) {
+      console.log(`觀察到最後一項，取消觀察`);
+      observer.unobserve(entries[0].target);
+      if (nextPage) {
+        console.log(`有下一頁`);
+        lazyLoading(nextPage, keyword);
+      } else {
+        console.log("沒有下一頁");
+      }
+    }
+  });
+
+  //觀察最後一個attractions-item
+  observer.observe(attractionItem[attractionItem.length - 1]);
+}
