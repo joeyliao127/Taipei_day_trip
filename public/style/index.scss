@@ -3,6 +3,9 @@
   font-style: normal;
   box-sizing: border-box;
 }
+body {
+  overflow-x: hidden;
+}
 .wrapper {
   position: relative;
   width: 100vw;
@@ -18,7 +21,8 @@ header {
   align-items: center;
   position: fixed;
   background-color: white;
-  inset: auto 0;
+  top: 0;
+  width: 100vw;
   z-index: 5;
 
   @media (min-width: 1200px) {
@@ -92,17 +96,15 @@ header {
   margin-top: 75px;
   flex-direction: column;
   align-items: flex-start;
-  color: var(--secondary-color-gray-10, #f8f8f8);
+  color: #f8f8f8;
   font-style: normal;
   font-weight: 700;
   width: 100%;
 
   h2 {
-    /* Text Shadow */
     text-shadow: 0px 0px 30px #abc;
-    /* Header 1 - Bold 28(24) */
     font-size: 28px;
-    line-height: 41px; /* 85.714% */
+    line-height: 41px;
     margin-bottom: 15px;
   }
   p {
@@ -244,7 +246,6 @@ main {
   width: 100%;
   padding: 15px;
   gap: 30px;
-  position: relative;
   @media (min-width: 1201px) {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(3, 1fr);
@@ -258,8 +259,10 @@ main {
     grid-template-rows: repeat(12, 1fr);
     gap: 15px;
   }
-  div.attractions-item {
+  div.attraction-item {
     border: 1px solid #e8e8e8;
+    border-radius: 5px;
+    overflow: hidden;
   }
 }
 
