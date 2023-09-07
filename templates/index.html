@@ -8,55 +8,53 @@
     <title>台北一日遊</title>
   </head>
   <body>
-    <div class="wrapper">
-      <header>
-        <div class="title">
-          <h1>台北一日遊</h1>
-          <div class="nav">
-            <div class="nav-item">
-              <a href="">預定行程</a>
-            </div>
-            <div class="nav-item">
-              <p>登入/註冊</p>
+    <header>
+      <div class="title">
+        <h1>台北一日遊</h1>
+        <div class="nav">
+          <div class="nav-item">
+            <a href="">預定行程</a>
+          </div>
+          <div class="nav-item">
+            <p>登入/註冊</p>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="main-area">
+      <section class="hero">
+        <div class="slogan">
+          <h2>輕鬆享受台北一日悠閒</h2>
+          <p>探索每個角落，體驗城市的深度旅遊行程</p>
+          <div class="search">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="輸入景點名稱查詢"
+            />
+            <div id="search-btn">
+              <img src="/pic/search.png" alt="search-icon" />
             </div>
           </div>
         </div>
-      </header>
-      <div class="main-area">
-        <section class="hero">
-          <div class="slogan">
-            <h2>輕鬆享受台北一日悠閒</h2>
-            <p>探索每個角落，體驗城市的深度旅遊行程</p>
-            <div class="search">
-              <input
-                type="text"
-                id="search-input"
-                placeholder="輸入景點名稱查詢"
-              />
-              <div id="search-btn">
-                <img src="/pic/search.png" alt="search-icon" />
-              </div>
-            </div>
+      </section>
+      <main>
+        <div class="mrt-area">
+          <div class="arr-item">
+            <div class="arrow" id="left-arrow"></div>
           </div>
-        </section>
-        <main>
-          <div class="mrt-area">
-            <div class="arr-item">
-              <div class="arrow" id="left-arrow"></div>
-            </div>
-            <div class="mrt-wrapper">
-              <div class="mrt-ctn"></div>
-            </div>
-            <div class="arr-item">
-              <div class="arrow" id="right-arrow"></div>
-            </div>
+          <div class="mrt-wrapper">
+            <div class="mrt-ctn"></div>
           </div>
-          <div class="attractions-ctn"></div>
-        </main>
-        <footer>
-          <p>COPYRIGHT © 2021 台北一日遊</p>
-        </footer>
-      </div>
+          <div class="arr-item">
+            <div class="arrow" id="right-arrow"></div>
+          </div>
+        </div>
+        <div class="attractions-ctn"></div>
+      </main>
+      <footer>
+        <p>COPYRIGHT © 2021 台北一日遊</p>
+      </footer>
     </div>
     <script src="/js/index.js"></script>
   </body>
