@@ -1,0 +1,344 @@
+* {
+  font-family: Noto Sans TC;
+  font-style: normal;
+  box-sizing: border-box;
+}
+
+.wrapper {
+  position: relative;
+  width: 100vw;
+}
+
+.main-area {
+  position: absolute;
+  width: 100%;
+  top: 54px;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  background-color: white;
+  top: 0;
+  width: 100vw;
+  z-index: 5;
+}
+@media (min-width: 1200px) {
+  header {
+    padding: 10px 0px;
+  }
+}
+@media (min-width: 600px) and (max-width: 1199px) {
+  header {
+    padding: 10px 0px;
+  }
+}
+@media (min-width: 360px) and (max-width: 599px) {
+  header {
+    padding: 10px 0px 10px 10px;
+  }
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.title h1 {
+  color: #489;
+  font-family: Noto Sans TC;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 34px;
+}
+.title .nav {
+  display: flex;
+}
+.title .nav .nav-item {
+  color: var(--secondary-color-gray-70, #666);
+  font-family: Noto Sans TC;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 13.3px; /* 83.125% */
+  padding: 10px;
+}
+.title .nav .nav-item a {
+  color: var(--secondary-color-gray-70, #666);
+  text-decoration: none;
+}
+.title .nav .nav-item p {
+  cursor: pointer;
+}
+@media (min-width: 1200px) {
+  .title {
+    max-width: 1200px;
+    width: 100%;
+  }
+}
+.hero {
+  display: flex;
+  justify-content: center;
+  height: 320px;
+  background: url("/pic/welcome.png"), lightgray 50%/cover no-repeat;
+}
+@media (min-width: 360px) and (max-width: 600px) {
+  .hero {
+    width: 100%;
+    padding: 10px;
+  }
+}
+
+.slogan {
+  display: flex;
+  padding: 10px;
+  margin-top: 75px;
+  flex-direction: column;
+  align-items: flex-start;
+  color: #f8f8f8;
+  font-style: normal;
+  font-weight: 700;
+  width: 100%;
+}
+.slogan h2 {
+  text-shadow: 0px 0px 30px #abc;
+  font-size: 28px;
+  line-height: 41px;
+  margin-bottom: 15px;
+}
+.slogan p {
+  /* Body - Bold 16(13.3) */
+  font-size: 16px;
+  line-height: 22px; /* 83.125% */
+  margin-bottom: 25px;
+}
+@media (min-width: 1200px) {
+  .slogan {
+    max-width: 1200px;
+  }
+}
+@media (min-width: 360px) and (max-width: 600px) {
+  .slogan {
+    width: 100%;
+  }
+}
+
+.search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.search input {
+  width: 400px;
+  height: 46px;
+  box-shadow: -10px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  border: none;
+  box-sizing: border-box;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  padding: 15px;
+}
+.search input::-moz-placeholder {
+  font-size: 16px;
+}
+.search input::placeholder {
+  font-size: 16px;
+}
+.search #search-btn {
+  display: flex;
+  background-color: #448899;
+  width: 60px;
+  height: 46px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  cursor: pointer;
+}
+.search #search-btn img {
+  margin: auto;
+}
+@media (max-width: 600px) {
+  .search input {
+    width: 230px;
+  }
+}
+
+main {
+  padding: 40px 0px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+@media (min-width: 1200px) {
+  main {
+    max-width: 1200px;
+    width: 100%;
+  }
+}
+.mrt-area {
+  padding: 0 0 20px 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mrt-wrapper {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  flex-grow: 1;
+}
+
+.mrt-ctn {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 13px 10px;
+  transition: all 1s ease-in-out;
+}
+.mrt-ctn p {
+  padding: 5px 15px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #666;
+  cursor: pointer;
+}
+.mrt-ctn p:hover {
+  color: black;
+}
+
+.arr-item {
+  width: 47px;
+  height: 50px;
+  cursor: pointer;
+  flex-grow: 0;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+.arr-item .arrow {
+  width: 32px;
+  height: 32px;
+  background-size: 32px 32px;
+}
+
+.arr-item:first-child {
+  padding: 9px 0 9px 15px;
+}
+.arr-item:first-child .arrow {
+  background-image: url("/pic/gray-left.png");
+}
+.arr-item:first-child .arrow:hover {
+  background-image: url("/pic/black-left.png");
+}
+
+.arr-item:last-child {
+  padding: 9px 15px 9px 0;
+}
+.arr-item:last-child .arrow {
+  background-image: url("/pic/gray-right.png");
+}
+.arr-item:last-child .arrow:hover {
+  background-image: url("/pic/black-right.png");
+}
+
+.attractions-ctn {
+  display: grid;
+  width: 100%;
+  padding: 15px;
+  gap: 30px;
+}
+@media (min-width: 1201px) {
+  .attractions-ctn {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+  }
+}
+@media (max-width: 1200px) {
+  .attractions-ctn {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .attractions-ctn {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+    gap: 15px;
+  }
+}
+.attractions-ctn div.attraction-item {
+  border: 1px solid #e8e8e8;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.item-pic {
+  position: relative;
+  aspect-ratio: 4/3;
+}
+.item-pic img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  vertical-align: bottom;
+}
+.item-pic p {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.6);
+  inset: auto 0 0 0;
+  font-size: 20px;
+  color: white;
+  padding: 10px;
+}
+
+.item-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
+}
+.item-details p {
+  line-height: 25px;
+  font-weight: 500;
+  color: #757575;
+}
+
+.no-result {
+  width: 60vw;
+  max-width: 700px;
+  min-width: 300px;
+  display: flex;
+  margin: auto;
+  padding: 50px;
+  border: 1px gray solid;
+  position: absolute;
+  inset: 0;
+}
+.no-result p {
+  margin: auto;
+  color: #757575;
+  font-family: "Noto Sans TC";
+}
+
+footer {
+  background-color: #757575;
+  display: flex;
+  padding: 40px 0;
+}
+footer p {
+  margin: auto;
+  font-family: "Noto Sans TC";
+  padding: 5px 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+}/*# sourceMappingURL=index.css.map */
