@@ -1,7 +1,6 @@
 from flask import *
-from routes.blueprint import blueprint
+from routes.attractions import attractions
 app = Flask(__name__)
-app.register_blueprint(blueprint)
 app=Flask(
 	__name__,
 	static_folder="public",
@@ -10,7 +9,7 @@ app=Flask(
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
 app.secret_key = "0xffffffff"
-app.register_blueprint(blueprint, url_prefix = "/api")
+app.register_blueprint(attractions, url_prefix = "/api")
 @app.after_request
 def add_cors_headers(response):
     response.headers['Access-Control-Allow-Origin'] = "*"
