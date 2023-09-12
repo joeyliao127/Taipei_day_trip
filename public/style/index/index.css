@@ -1,18 +1,15 @@
 * {
-  font-family: Noto Sans TC;
+  font-family: "Noto Sans TC", sans-serif;
   font-style: normal;
   box-sizing: border-box;
 }
-
-.wrapper {
-  position: relative;
-  width: 100vw;
+* a {
+  text-decoration: none;
 }
 
 .main-area {
-  position: absolute;
   width: 100%;
-  top: 54px;
+  margin-top: 54px;
 }
 
 header {
@@ -32,7 +29,7 @@ header {
 }
 @media (min-width: 600px) and (max-width: 1199px) {
   header {
-    padding: 10px 0px;
+    padding: 10px 10px;
   }
 }
 @media (min-width: 360px) and (max-width: 599px) {
@@ -46,6 +43,9 @@ header {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+}
+.title a {
+  text-decoration: none;
 }
 .title h1 {
   color: #489;
@@ -277,6 +277,10 @@ main {
   border: 1px solid #e8e8e8;
   border-radius: 5px;
   overflow: hidden;
+  cursor: pointer;
+}
+.attractions-ctn div.attraction-item:hover {
+  opacity: 0.9;
 }
 
 .item-pic {

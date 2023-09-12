@@ -2,14 +2,14 @@ import json
 from flask import Blueprint, request
 from packages import get_data 
 
-blueprint = Blueprint('blueprint', __name__)
+attractions = Blueprint('attractions', __name__)
 
-@blueprint.after_request
+@attractions.after_request
 def add_cors_headers(response):
 	response.headers['Access-Control-Allow-Origin'] = "*"
 	return response
 
-@blueprint.route("/mrts")
+@attractions.route("/mrts")
 def api_mrts():
 	result = get_data.get_mrts()
 	if("data" in result):
@@ -21,7 +21,7 @@ def api_mrts():
 	elif("error" in result):
 		return json.dumps({"error": True, "message": "查詢失敗"}, ensure_ascii=False),500,{'Content-Type': "application/json; charset=utf-8"}
 	
-@blueprint.route("/attractions")
+@attractions.route("/attractions")
 def attraction_page():
 	page = int(request.args.get("page", "0"))
 	keyword = request.args.get("keyword", None)
@@ -63,7 +63,7 @@ def attraction_page():
 		print("error = ", error)
 		return json.dumps(error,ensure_ascii=False),500,{'Content-Type': "application/json; charset=utf-8"}
 	
-@blueprint.route("/attraction/<attractionId>")
+@attractions.route("/attraction/<attractionId>")
 def api_attractions(attractionId):
 	id = int(attractionId)
 	data = get_data.get_one_attraction(id)

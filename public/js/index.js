@@ -29,13 +29,12 @@ init();
 
 window.addEventListener("resize", () => {
   mrtPoint = moveMRT();
-  setTimeout(1000);
 });
 function moveMRT() {
   let mrtCtn = document.querySelector(".mrt-ctn");
   const mrts = document.querySelectorAll(".mrt-ctn p");
-  const totalWidth = mrtCtn.scrollWidth;
-  let ctnWidth = mrtCtn.offsetWidth;
+  const totalWidth = mrtCtn.scrollWidth; //MRT 文字總寬度
+  let ctnWidth = mrtCtn.offsetWidth; //MRT CTN顯示總寬度
   let pointer = 0;
   let countWidth = 0;
   let mrtContentWidth = 0;
@@ -86,7 +85,9 @@ function makeAttractions(attraciton, keyword) {
   attNextPage = attraciton.nextPage;
 
   for (item of attracitonData) {
-    let { name, category, mrt, images } = item;
+    let { id, name, category, mrt, images } = item;
+    let aTag = document.createElement("a");
+    aTag.setAttribute("href", `/attraction/${id}`);
     let attItem = document.createElement("div");
     attItem.classList.add("attraction-item");
 
@@ -113,8 +114,9 @@ function makeAttractions(attraciton, keyword) {
     itemDetails.appendChild(attCategory);
     attItem.appendChild(attPic);
     attItem.appendChild(itemDetails);
+    aTag.appendChild(attItem);
 
-    attractionsCtn.appendChild(attItem);
+    attractionsCtn.appendChild(aTag);
   }
   console.log(`make Attractions: keyword = ${keyword}`);
   observeListItem(attNextPage, keyword);
@@ -202,17 +204,11 @@ function observeListItem(nextPage, keyword) {
   const attractionItem = document.querySelectorAll(".attraction-item");
   const observer = new IntersectionObserver((entries) => {
     let observed = entries[0].isIntersecting;
-    console.log(
-      `obseveListItem:準備觀察，NextPage = ${nextPage}, keyword = ${keyword}`
-    );
     if (observed) {
-      console.log(`觀察到最後一項，取消觀察`);
+      console.log(`[0] = ${entries[0]}`);
       observer.unobserve(entries[0].target);
       if (nextPage) {
-        console.log(`有下一頁`);
         lazyLoading(nextPage, keyword);
-      } else {
-        console.log("沒有下一頁");
       }
     }
   });
