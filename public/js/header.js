@@ -79,7 +79,7 @@ signinBtn.addEventListener("click", async (e) => {
     return 0;
   }
 
-  const response = await fetch("http://127.0.0.1:3000/api/user/auth", {
+  const response = await fetch("http://44.219.72.138/:3000/api/user/auth", {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -141,7 +141,7 @@ signupBtn.addEventListener("click", async (e) => {
 });
 
 async function getUserData(token) {
-  const response = await fetch("http://127.0.0.1:3000/api/user/auth", {
+  const response = await fetch("http://44.219.72.138/:3000/api/user/auth", {
     method: "GET",
     headers: {
       Authorization: "Bearer " + token,
