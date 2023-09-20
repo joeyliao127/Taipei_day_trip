@@ -1,0 +1,156 @@
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  background-color: white;
+  top: 0;
+  width: 100vw;
+  z-index: 5;
+
+  @media (min-width: 1200px) {
+    padding: 10px 0px;
+  }
+  @media (min-width: 600px) and (max-width: 1199px) {
+    padding: 10px 10px;
+  }
+  @media (min-width: 360px) and (max-width: 599px) {
+    padding: 10px 0px 10px 10px;
+  }
+}
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  a {
+    text-decoration: none;
+  }
+
+  h1 {
+    color: #489;
+    font-family: Noto Sans TC;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 34px;
+    cursor: pointer;
+  }
+  .nav {
+    display: flex;
+    .nav-item {
+      color: var(--secondary-color-gray-70, #666);
+      font-family: Noto Sans TC;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 13.3px; /* 83.125% */
+      padding: 10px;
+      a {
+        color: var(--secondary-color-gray-70, #666);
+        text-decoration: none;
+      }
+      p {
+        cursor: pointer;
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+  @media (min-width: 1200px) {
+    max-width: 1200px;
+    width: 100%;
+  }
+  @media (min-width: 601px) and (man-width: 1199px) {
+  }
+  @media (min-width: 360px) and (max-width: 600px) {
+  }
+}
+.signin-area {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0.25);
+
+  z-index: 10;
+  .form-top {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    p {
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 24px;
+      color: #666;
+    }
+    img {
+      position: absolute;
+      inset: 0 0 auto auto;
+      margin: auto;
+      cursor: pointer;
+      border: 1px solid #666;
+    }
+  }
+  form {
+    width: 340px;
+    background-color: white;
+    border-top: #6ab 10px solid;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    inset: 80px 0 auto 0;
+    margin: auto;
+    border-radius: 6px;
+    box-shadow: 0px 4px 60px 0px #aaa;
+    gap: 10px;
+
+    input {
+      padding: 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      font-weight: 500;
+    }
+    button {
+      background-color: #489;
+      color: white;
+      border-radius: 5px;
+      padding: 10px;
+      flex-grow: 0;
+      font-size: 19px;
+      font-weight: 400;
+      cursor: pointer;
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+    p {
+      text-align: center;
+      color: #666;
+      font-size: 16px;
+      font-weight: 500;
+    }
+  }
+  .signin-msg {
+    color: red;
+  }
+
+  .signup-msg {
+    color: red;
+  }
+  .disabled-form {
+    display: none;
+  }
+
+  span {
+    cursor: pointer;
+  }
+}
+
+.none {
+  display: none;
+}
