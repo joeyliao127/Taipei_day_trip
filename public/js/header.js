@@ -7,19 +7,15 @@ const navItem = document.querySelector(".nav-item:last-child");
 const signinArea = document.querySelector(".signin-area");
 const token = localStorage.getItem("token");
 
-// console.log(`if token${token}`);
 function init() {
-  if (token) {
-    userStatus("login");
-  } else {
-    userStatus("logout");
-  }
+  userStatus();
 }
 
 init();
 
-async function userStatus(status) {
+async function userStatus() {
   const navMsg = navItem.querySelector("p");
+  let userData;
   if (token) {
     const response = await fetch("http://44.219.72.138:3000/api/user/auth", {
       method: "GET",
@@ -28,14 +24,15 @@ async function userStatus(status) {
       },
     });
     const data = await response.json();
-    const userData = data["data"];
+    userData = data["data"];
   } else {
     const response = await fetch("http://44.219.72.138:3000/api/user/auth");
     const data = await response.json();
-    const userData = data["data"];
+    userData = data["data"];
   }
 
   if (userData) {
+    console.log(userData);
     navMsg.textContent = "登出系統";
     navItem.addEventListener("click", () => {
       localStorage.removeItem("token");
@@ -48,25 +45,6 @@ async function userStatus(status) {
       signinArea.classList.toggle("none");
     });
   }
-
-  // function userStatus(status) {
-  //   const navMsg = navItem.querySelector("p");
-  //   if (status == "logout") {
-  //     navItem.setAttribute("data-status", "logout");
-  //     navMsg.textContent = "登入/註冊";
-  //     navItem.addEventListener("click", () => {
-  //       console.log("logout nav被點擊");
-  //       signinArea.classList.toggle("none");
-  //     });
-  //   } else if (status == "login") {
-  //     navMsg.textContent = "登出系統";
-  //     navItem.addEventListener("click", () => {
-  //       localStorage.removeItem("token");
-  //       window.location.href = "/";
-  //       navItem.textContent = "登入/註冊";
-  //       navItem.setAttribute("data-status", "logout");
-  //     });
-  //   }
 }
 
 const closeBtn = document.querySelectorAll(".close-btn");
@@ -174,15 +152,3 @@ signupBtn.addEventListener("click", async (e) => {
     signupMsg.textContent = result["message"];
   }
 });
-
-async function getUserData(token) {
-  const response = await fetch("http://44.219.72.138:3000/api/user/auth", {
-    method: "GET",
-    headers: {
-      Authorization: "Bearer " + token,
-    },
-  });
-  const data = await response.json();
-  console.log(data);
-}
-getUserData(token);
