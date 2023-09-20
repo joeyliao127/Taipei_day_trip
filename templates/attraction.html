@@ -17,13 +17,13 @@
             <a href="">預定行程</a>
           </div>
           <div class="nav-item">
-            <p>登入/註冊</p>
+            <p></p>
           </div>
         </div>
       </div>
     </header>
     <section class="signin-area none">
-      <form action="" class="sigin-form">
+      <form class="sigin-form">
         <div class="form-top">
           <p>登入會員帳號</p>
           <img src="/pic/close.png" alt="close-icon" class="close-btn" />
@@ -33,37 +33,49 @@
           name="email"
           id="signin-email"
           placeholder="輸入電子信箱"
+          required
         />
         <input
           type="password"
           name="password"
           id="signin-password"
           placeholder="輸入密碼"
+          required
         />
         <button>登入帳戶</button>
-        <p>還沒有帳戶？點此<span class="toSignup">註冊</span></p>
+        <p class="signin-msg"></p>
+        <p>還沒有帳戶？點此<span id="toSignup">註冊</span></p>
       </form>
-      <form action="" class="form-signup form-disabled">
+      <form class="signup-form disabled-form">
         <div class="form-top">
           <p>註冊會員帳號</p>
           <img src="/pic/close.png" alt="close-icon" class="close-btn" />
         </div>
 
-        <input type="text" name="name" id="name" placeholder="輸入姓名" />
+        <input
+          type="text"
+          name="name"
+          id="signup-name"
+          placeholder="輸入姓名"
+          required
+        />
         <input
           type="email"
           name="email"
           id="signup-email"
           placeholder="輸入電子郵件"
+          required
         />
         <input
           type="password"
           name="password"
           id="signup-password"
           placeholder="輸入密碼"
+          required
         />
         <button>註冊新帳戶</button>
-        <p>已經有帳戶了？點此<span id="toSignup">登入</span></p>
+        <p class="signup-msg"></p>
+        <p>已經有帳戶了？點此<span id="toSignin">登入</span></p>
       </form>
     </section>
     <div class="main-area">
