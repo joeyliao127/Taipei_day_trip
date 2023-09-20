@@ -70,6 +70,7 @@ header {
     width: 100%;
   }
 }
+
 .signin-area {
   display: flex;
   justify-content: center;
@@ -95,7 +96,6 @@ header {
   inset: 0 0 auto auto;
   margin: auto;
   cursor: pointer;
-  border: 1px solid #666;
 }
 .signin-area form {
   width: 340px;
@@ -121,6 +121,7 @@ header {
 .signin-area form button {
   background-color: #489;
   color: white;
+  border: none;
   border-radius: 5px;
   padding: 10px;
   flex-grow: 0;

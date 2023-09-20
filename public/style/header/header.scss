@@ -62,10 +62,6 @@ header {
     max-width: 1200px;
     width: 100%;
   }
-  @media (min-width: 601px) and (man-width: 1199px) {
-  }
-  @media (min-width: 360px) and (max-width: 600px) {
-  }
 }
 .signin-area {
   display: flex;
@@ -91,7 +87,6 @@ header {
       inset: 0 0 auto auto;
       margin: auto;
       cursor: pointer;
-      border: 1px solid #666;
     }
   }
   form {
@@ -118,6 +113,7 @@ header {
     button {
       background-color: #489;
       color: white;
+      border: none;
       border-radius: 5px;
       padding: 10px;
       flex-grow: 0;
