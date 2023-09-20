@@ -37,7 +37,6 @@ async function userStatus() {
     navItem.addEventListener("click", () => {
       localStorage.removeItem("token");
       window.location.href = "/";
-      navItem.textContent = "登入/註冊";
     });
   } else {
     navMsg.textContent = "登入/註冊";

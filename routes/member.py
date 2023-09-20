@@ -17,7 +17,7 @@ def decode_jwt_token(token, secret_key):
     return data
 
 conten_type = {'Content-Type': "application/json; charset=utf-8"}
-
+email_regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
 @members.after_request
 def add_cors_headers(response):
 	response.headers['Access-Control-Allow-Origin'] = "*"
@@ -27,10 +27,15 @@ def add_cors_headers(response):
 def signup():
     raw_data = request.data
     json_data = json.loads(raw_data.decode('utf-8'))
+    email = json_data["email"]
+    name = json_data["name"]
+    password = json_data["password"]
+    if(not (email and name and password)):
+        return json.dumps({"error": True, "message": "請輸入完整的資訊"}), 400, conten_type
     userInfo = {
-        "email":json_data["email"],
-        "name": json_data["name"],
-        "password": json_data["password"]
+        "email":email,
+        "name": name,
+        "password": password
           }
     print("signup解析完json資料：",userInfo)
 
@@ -49,7 +54,7 @@ def sigin():
     if(request.method == "PUT"):
         raw_data = request.data
         json_data = json.loads(raw_data.decode('utf-8'))
-        email_regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+       
         email = json_data["email"]
         if(not re.match(email_regex, email)):
             return json.dumps({"error": True, "msg": "請輸入正確的Email格式"}, ensure_ascii = False), 401, conten_type
