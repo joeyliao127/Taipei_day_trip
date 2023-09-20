@@ -20,7 +20,8 @@ conten_type = {'Content-Type': "application/json; charset=utf-8"}
 
 @members.after_request
 def add_cors_headers(response):
-    response.headers['Access-Allow-Origin'] = "*"
+	response.headers['Access-Control-Allow-Origin'] = "*"
+	return response
 
 @members.route("/user", methods=["POST"])
 def signup():
