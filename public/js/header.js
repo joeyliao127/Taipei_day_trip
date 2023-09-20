@@ -17,24 +17,56 @@ function init() {
 }
 
 init();
-function userStatus(status) {
+
+async function userStatus(status) {
   const navMsg = navItem.querySelector("p");
-  if (status == "logout") {
-    navItem.setAttribute("data-status", "logout");
-    navMsg.textContent = "登入/註冊";
-    navItem.addEventListener("click", () => {
-      console.log("logout nav被點擊");
-      signinArea.classList.toggle("none");
+  if (token) {
+    const response = await fetch("http://44.219.72.138:3000/api/user/auth", {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
     });
-  } else if (status == "login") {
+    const data = await response.json();
+    const userData = data["data"];
+  } else {
+    const response = await fetch("http://44.219.72.138:3000/api/user/auth");
+    const data = await response.json();
+    const userData = data["data"];
+  }
+
+  if (userData) {
     navMsg.textContent = "登出系統";
     navItem.addEventListener("click", () => {
       localStorage.removeItem("token");
       window.location.href = "/";
       navItem.textContent = "登入/註冊";
-      navItem.setAttribute("data-status", "logout");
+    });
+  } else {
+    navMsg.textContent = "登入/註冊";
+    navItem.addEventListener("click", () => {
+      signinArea.classList.toggle("none");
     });
   }
+
+  // function userStatus(status) {
+  //   const navMsg = navItem.querySelector("p");
+  //   if (status == "logout") {
+  //     navItem.setAttribute("data-status", "logout");
+  //     navMsg.textContent = "登入/註冊";
+  //     navItem.addEventListener("click", () => {
+  //       console.log("logout nav被點擊");
+  //       signinArea.classList.toggle("none");
+  //     });
+  //   } else if (status == "login") {
+  //     navMsg.textContent = "登出系統";
+  //     navItem.addEventListener("click", () => {
+  //       localStorage.removeItem("token");
+  //       window.location.href = "/";
+  //       navItem.textContent = "登入/註冊";
+  //       navItem.setAttribute("data-status", "logout");
+  //     });
+  //   }
 }
 
 const closeBtn = document.querySelectorAll(".close-btn");

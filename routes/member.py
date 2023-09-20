@@ -69,7 +69,7 @@ def sigin():
         user_data = {}
         auth_header = request.headers.get("Authorization", None)
         if(not auth_header):
-            return json.dumps({"error": True, "message": "請先登入帳號"}, ensure_ascii = False), 401, conten_type
+            return json.dumps({"data": None}, ensure_ascii = False), 401, conten_type
         print(f"author = ${auth_header}")
         data = auth_header.split(" ");
         token = data[1];
