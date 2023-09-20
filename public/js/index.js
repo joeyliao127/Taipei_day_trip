@@ -39,37 +39,23 @@ function moveMRT() {
   let countWidth = 0;
   let mrtContentWidth = 0;
   let result = [0];
-  console.log(`total width = ${totalWidth}`);
-  console.log(`當前ctn寬度 = ${ctnWidth}`);
   for (let i = 0; i < mrts.length; i += 1) {
-    console.log(`================${i}================`);
     if (countWidth < ctnWidth) {
-      console.log(`countWidt:${countWidth} < ctnWidth:${ctnWidth}`);
-      console.log(
-        `countWidth開始累加:${mrts[i].offsetWidth}\n當前countWidth = ${countWidth}`
-      );
       mrtContentWidth = mrts[i].offsetWidth;
       countWidth += mrtContentWidth;
-      console.log(`累加後的countWidth = ${countWidth}`);
     } else {
       pointer += countWidth - mrtContentWidth;
-      console.log(
-        `countWidth爆掉了！！ 扣掉上一次item寬度:${mrtContentWidth}的countWidth = ${countWidth}`
-      );
       result.push(pointer);
-      console.log(`爆掉後扣掉上一次item的寬 = 座標：reulst = ${result}`);
       countWidth = mrtContentWidth + mrts[i].offsetWidth;
       continue;
     }
   }
 
-  console.log(`result = ${result}`);
   return result;
 }
 
 function makeAttractions(attraciton, keyword) {
   if (!attraciton.data) {
-    console.log(`查無結果`);
     const ctn = document.querySelector(".attractions-ctn");
     ctn.setAttribute("style", "padding: 200px;");
     const noResult = document.createElement("div");
@@ -118,7 +104,6 @@ function makeAttractions(attraciton, keyword) {
 
     attractionsCtn.appendChild(aTag);
   }
-  console.log(`make Attractions: keyword = ${keyword}`);
   observeListItem(attNextPage, keyword);
 }
 
@@ -156,7 +141,6 @@ rightArrow.addEventListener("click", () => {
     return 0;
   }
   pagesPointer += 1;
-  console.log(`前進座標為：${mrtPoint[pagesPointer]}`);
   mrtCtn.style.transform = `translateX(-${mrtPoint[pagesPointer]}px)`;
 });
 
@@ -165,7 +149,6 @@ leftArrow.addEventListener("click", () => {
     return 0;
   }
   pagesPointer -= 1;
-  console.log(`退回座標為：${mrtPoint[pagesPointer]}`);
   mrtCtn.style.transform = `translateX(-${mrtPoint[pagesPointer]}px)`;
 });
 
@@ -174,7 +157,6 @@ const searchBtn = document.querySelector("#search-btn");
 searchBtn.addEventListener("click", async () => {
   const searchInput = document.querySelector("#search-input");
   const keyword = searchInput.value;
-  console.log(`監聽serach-btn: keyword = ${keyword}`);
   let attResponse = await fetch(
     `http://44.219.72.138:3000/api/attractions?page=0&keyword=${keyword}`
   );
@@ -184,7 +166,6 @@ searchBtn.addEventListener("click", async () => {
 });
 
 async function lazyLoading(nextPage, keyword = null) {
-  console.log(`lazyloading內的keyword = ${keyword}`);
   if (keyword) {
     const response = await fetch(
       `http://44.219.72.138:3000/api/attractions?page=${nextPage}&keyword=${keyword}`
@@ -205,7 +186,6 @@ function observeListItem(nextPage, keyword) {
   const observer = new IntersectionObserver((entries) => {
     let observed = entries[0].isIntersecting;
     if (observed) {
-      console.log(`[0] = ${entries[0]}`);
       observer.unobserve(entries[0].target);
       if (nextPage) {
         lazyLoading(nextPage, keyword);

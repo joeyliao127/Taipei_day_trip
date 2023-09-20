@@ -1,0 +1,156 @@
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  background-color: white;
+  top: 0;
+  width: 100vw;
+  z-index: 5;
+}
+@media (min-width: 1200px) {
+  header {
+    padding: 10px 0px;
+  }
+}
+@media (min-width: 600px) and (max-width: 1199px) {
+  header {
+    padding: 10px 10px;
+  }
+}
+@media (min-width: 360px) and (max-width: 599px) {
+  header {
+    padding: 10px 0px 10px 10px;
+  }
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.title a {
+  text-decoration: none;
+}
+.title h1 {
+  color: #489;
+  font-family: Noto Sans TC;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 34px;
+  cursor: pointer;
+}
+.title .nav {
+  display: flex;
+}
+.title .nav .nav-item {
+  color: var(--secondary-color-gray-70, #666);
+  font-family: Noto Sans TC;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 13.3px; /* 83.125% */
+  padding: 10px;
+}
+.title .nav .nav-item a {
+  color: var(--secondary-color-gray-70, #666);
+  text-decoration: none;
+}
+.title .nav .nav-item p {
+  cursor: pointer;
+}
+.title .nav .nav-item p:hover {
+  opacity: 0.8;
+}
+@media (min-width: 1200px) {
+  .title {
+    max-width: 1200px;
+    width: 100%;
+  }
+}
+
+.signin-area {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0.25);
+  z-index: 10;
+}
+.signin-area .form-top {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+.signin-area .form-top p {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 24px;
+  color: #666;
+}
+.signin-area .form-top img {
+  position: absolute;
+  inset: 0 0 auto auto;
+  margin: auto;
+  cursor: pointer;
+}
+.signin-area form {
+  width: 340px;
+  background-color: white;
+  border-top: #6ab 10px solid;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  inset: 80px 0 auto 0;
+  margin: auto;
+  border-radius: 6px;
+  box-shadow: 0px 4px 60px 0px #aaa;
+  gap: 10px;
+}
+.signin-area form input {
+  padding: 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  font-weight: 500;
+}
+.signin-area form button {
+  background-color: #489;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  flex-grow: 0;
+  font-size: 19px;
+  font-weight: 400;
+  cursor: pointer;
+}
+.signin-area form button:hover {
+  opacity: 0.9;
+}
+.signin-area form p {
+  text-align: center;
+  color: #666;
+  font-size: 16px;
+  font-weight: 500;
+}
+.signin-area .signin-msg {
+  color: red;
+}
+.signin-area .signup-msg {
+  color: red;
+}
+.signin-area .disabled-form {
+  display: none;
+}
+.signin-area span {
+  cursor: pointer;
+}
+
+.none {
+  display: none;
+}/*# sourceMappingURL=header.css.map */
