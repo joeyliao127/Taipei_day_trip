@@ -18,6 +18,10 @@ def decode_jwt_token(token, secret_key):
 
 conten_type = {'Content-Type': "application/json; charset=utf-8"}
 
+@members.after_request
+def add_cors_headers(response):
+    response.headers['Access-Allow-Origin'] = "*"
+
 @members.route("/user", methods=["POST"])
 def signup():
     raw_data = request.data

@@ -56,11 +56,13 @@ const signupMsg = document.querySelector(".signup-msg");
 toSignup.addEventListener("click", () => {
   signInForm.classList.toggle("disabled-form");
   signUpForm.classList.toggle("disabled-form");
+  signinMsg.textContent = "";
 });
 
 toSignin.addEventListener("click", () => {
   signInForm.classList.toggle("disabled-form");
   signUpForm.classList.toggle("disabled-form");
+  signupMsg.textContent = "";
 });
 
 const email_regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -70,12 +72,12 @@ signinBtn.addEventListener("click", async (e) => {
   e.preventDefault();
   const email = signinEmail.value;
   const password = signinPassword.value;
-  if (!email_regex.test(email)) {
-    signinMsg.textContent = "請輸入正確格式的Email";
-    return 0;
-  }
   if (!password && !email) {
     signinMsg.textContent = "請輸入完整資訊";
+    return 0;
+  }
+  if (!email_regex.test(email)) {
+    signinMsg.textContent = "請輸入正確格式的Email";
     return 0;
   }
 
@@ -111,12 +113,13 @@ signupBtn.addEventListener("click", async (e) => {
   const email = signupEmail.value;
   const name = signupName.value;
   const password = signupPassword.value;
-  if (!email_regex.test(email)) {
-    signupMsg.textContent = "請填寫正確的email格式";
-    return 0;
-  }
+
   if (!email && !name && !password) {
     signupMsg.textContent = "請填寫完整資訊";
+    return 0;
+  }
+  if (!email_regex.test(email)) {
+    signupMsg.textContent = "請填寫正確的email格式";
     return 0;
   }
   const response = await fetch("/api/user", {
