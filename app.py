@@ -30,6 +30,14 @@ def booking():
 @app.route("/thankyou")
 def thankyou():
 	return render_template("thankyou.html")
+
+@app.route("/test")
+def test():
+	accept_type = request.headers.get("Accept")
+	print(accept_type)
+	if(accept_type == "application/json"):
+		return "type error", 406
+	return "0"
 #---------------------------------------------
 		
 app.run(host="0.0.0.0", port=3000, debug=True, use_reloader=True)
