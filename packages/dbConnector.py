@@ -1,11 +1,14 @@
 import mysql.connector
+from dotenv import dotenv_values
+
+secret = dotenv_values('.env')
 
 def connectDB():
     dbconfig = {
         "host": "127.0.0.1",
         "port": 3306,
-        "user": "root", 
-        "password": "root",
+        "user": secret["mysql_user"], 
+        "password": secret["mysql_pwd"],
         "database": "taipei_trip",
     }
 

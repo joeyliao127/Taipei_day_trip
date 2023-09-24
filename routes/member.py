@@ -4,7 +4,15 @@ from packages import memberInfo
 import re
 import jwt
 import datetime
+from dotenv import dotenv_values
+
+secret = dotenv_values('.env')
 members = Blueprint('members', __name__)
+
+@members.after_request
+def add_cors_headers(response):
+    response.headers['Access-Control-Allow-Origin'] = "*"
+    return response
 
 def generate_jwt_token(payload,secret_key):
     expiration_time = datetime.datetime.utcnow() + datetime.timedelta(days=7)
@@ -50,7 +58,7 @@ def signup():
         
 @members.route("/user/auth", methods=["PUT", "GET"])
 def sigin():
-    secert = "fxffffffff"
+    jwt_key = secret["jwt_key"]
     if(request.method == "PUT"):
         raw_data = request.data
         json_data = json.loads(raw_data.decode('utf-8'))
@@ -67,7 +75,7 @@ def sigin():
             return json.dumps({"error": True, "message": result["message"]}, ensure_ascii = False), 401, conten_type
         else:
             payload = result
-            token = generate_jwt_token(payload, secert)
+            token = generate_jwt_token(payload, jwt_key)
             return json.dumps({"token": token}), 200, conten_type
         
     elif(request.method == "GET"):
@@ -79,7 +87,7 @@ def sigin():
         data = auth_header.split(" ");
         token = data[1];
         print(f"token = ${token}")
-        payload = decode_jwt_token(token, secert, )
+        payload = decode_jwt_token(token, secret)
         user_data["data"] = {
             "id": payload["id"],
             "name": payload["name"],

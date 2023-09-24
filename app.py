@@ -1,12 +1,14 @@
 from flask import *
 from routes.attractions import attractions
 from routes.member import members
+from flask_cors import CORS
 app = Flask(__name__)
 app=Flask(
 	__name__,
 	static_folder="public",
 	static_url_path="/"
 )
+CORS(app)
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
 app.secret_key = "0xffffffff"
@@ -31,13 +33,6 @@ def booking():
 def thankyou():
 	return render_template("thankyou.html")
 
-@app.route("/test")
-def test():
-	accept_type = request.headers.get("Accept")
-	print(accept_type)
-	if(accept_type == "application/json"):
-		return "type error", 406
-	return "0"
 #---------------------------------------------
 		
 app.run(host="0.0.0.0", port=3000, debug=True, use_reloader=True)
