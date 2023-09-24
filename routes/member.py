@@ -45,10 +45,8 @@ def signup():
         "name": name,
         "password": password
           }
-    print("signup解析完json資料：",userInfo)
 
     status = memberInfo.signup(userInfo)    
-    print(f"user route ${status}")
     if(status["status"]):
         return json.dumps({"ok": True}, 
             ensure_ascii=False), 200, conten_type
@@ -70,7 +68,7 @@ def sigin():
         email = json_data["email"]
         password = json_data["password"]
         result = memberInfo.sigin(email, password)
-        print(f"sign route result = ${result}")
+
         if("status" in result):
             return json.dumps({"error": True, "message": result["message"]}, ensure_ascii = False), 401, conten_type
         else:
@@ -83,11 +81,11 @@ def sigin():
         auth_header = request.headers.get("Authorization", None)
         if(not auth_header):
             return json.dumps({"data": None}, ensure_ascii = False), 401, conten_type
-        print(f"author = ${auth_header}")
+   
         data = auth_header.split(" ");
         token = data[1];
-        print(f"token = ${token}")
-        payload = decode_jwt_token(token, secret)
+
+        payload = decode_jwt_token(token, jwt_key)
         user_data["data"] = {
             "id": payload["id"],
             "name": payload["name"],
