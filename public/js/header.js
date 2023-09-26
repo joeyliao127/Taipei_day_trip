@@ -17,7 +17,7 @@ async function userStatus() {
   const navMsg = navItem.querySelector("p");
   let userData;
   if (token) {
-    const response = await fetch("http://44.219.72.138:3000/api/user/auth", {
+    const response = await fetch("http://127.0.0.1:3000/api/user/auth", {
       method: "GET",
       headers: {
         Authorization: "Bearer " + token,
@@ -26,7 +26,7 @@ async function userStatus() {
     const data = await response.json();
     userData = data["data"];
   } else {
-    const response = await fetch("http://44.219.72.138:3000/api/user/auth");
+    const response = await fetch("http://127.0.0.1:3000/api/user/auth");
     const data = await response.json();
     userData = data["data"];
   }
@@ -90,7 +90,7 @@ signinBtn.addEventListener("click", async (e) => {
     return 0;
   }
 
-  const response = await fetch("http://44.219.72.138:3000/api/user/auth", {
+  const response = await fetch("http://127.0.0.1:3000/api/user/auth", {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -100,6 +100,7 @@ signinBtn.addEventListener("click", async (e) => {
       password: signinPassword.value,
     }),
   });
+
   const result = await response.json();
   console.log(result);
   if ("token" in result) {

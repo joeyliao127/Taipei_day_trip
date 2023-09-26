@@ -1,6 +1,7 @@
 from flask import *
 from routes.attractions import attractions
 from routes.member import members
+from routes.booking import bookings
 from flask_cors import CORS
 app = Flask(__name__)
 app=Flask(
@@ -11,9 +12,9 @@ app=Flask(
 CORS(app)
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
-app.secret_key = "0xffffffff"
 app.register_blueprint(attractions, url_prefix = "/api")
 app.register_blueprint(members, url_prefix = "/api")
+app.register_blueprint(bookings, url_prefix = "/api")
 @app.after_request
 def add_cors_headers(response):
     response.headers['Access-Control-Allow-Origin'] = "*"
