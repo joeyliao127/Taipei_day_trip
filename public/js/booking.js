@@ -76,9 +76,9 @@ async function createDetailCtn(data) {
   const cardInfoForm = document.querySelector(".cardInfo");
   const confirm = document.querySelector(".confirm");
   console.log(userInfoForm, cardInfoForm, confirm);
-  userInfoForm.setAttribute("style", "display: block");
-  cardInfoForm.setAttribute("style", "display: block");
-  confirm.setAttribute("style", "display: block");
+  userInfoForm.setAttribute("style", "display: flex");
+  cardInfoForm.setAttribute("style", "display: flex");
+  confirm.setAttribute("style", "display: flex");
 }
 
 async function decodeToken() {
