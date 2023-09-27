@@ -51,11 +51,15 @@ def sigin():
         email = json_data["email"]
         password = json_data["password"]
         result = memberInfo.sigin(email, password)
-
+        #result格式 = ${'id': 5, 'name': 'aaa', 'password': 'aaa', 'email': 'aaa@aqua.com'}
         if("status" in result):
             return json.dumps({"error": True, "message": result["message"]}, ensure_ascii = False), 401, content_type
         else:
-            payload = result
+            payload = {
+                "id": result["id"],
+                "name": result["name"],
+                "email": result["email"]
+            }
             token = jwt_token.generate_jwt_token(payload)
             return json.dumps({"token": token}), 200, content_type
         

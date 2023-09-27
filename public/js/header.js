@@ -20,17 +20,16 @@ async function init() {
 init();
 
 async function checkUserStatus() {
-  console.log("checkUserStatus的token:", token);
+  // console.log("checkUserStatus的token:", token);
   let userData;
   if (token) {
     userData = await getUserData(token);
-    console.log("透過token fetch到api後，取得的使用者資訊：", userData);
+    // console.log("透過token fetch到api後，取得的使用者資訊：", userData);
   } else {
     userData = null;
   }
-  console.log("userData = ", userData);
+  // console.log("userData = ", userData);
   if (userData) {
-    console.log(userData);
     clickSignout();
   } else {
     showSigninForm();
@@ -43,7 +42,6 @@ async function checkUserStatus() {
 }
 
 async function getUserData(token) {
-  console.log("getUserData有token:", token);
   const response = await fetch("http://127.0.0.1:3000/api/user/auth", {
     method: "GET",
     headers: {
@@ -52,7 +50,7 @@ async function getUserData(token) {
   });
   const data = await response.json();
   const userData = data["data"];
-  console.log("Fetch完成decode後的token:", userData);
+  // console.log("Fetch完成decode後的token:", userData);
   return userData;
 }
 
@@ -124,10 +122,10 @@ function clickSigin() {
     const result = await response.json();
     const navItem = document.querySelector(".nav-item:last-child p");
     if ("token" in result) {
-      console.log(result.token);
       localStorage.setItem("token", result.token);
       navItem.textContent = "登出系統";
-      window.location.href = "/";
+      const currentURL = window.location.href;
+      window.location.href = currentURL;
     } else {
       console.log(`result = ${result}`);
       signinMsg.textContent = result["message"];

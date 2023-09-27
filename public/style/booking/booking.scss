@@ -83,7 +83,7 @@ main {
   color: #666;
   margin-bottom: 30px;
   position: relative;
-  left: -10px;
+  // left: -10px;
   @media (max-width: 750px) {
     left: 0;
   }
@@ -142,4 +142,11 @@ main {
       opacity: 0.8;
     }
   }
+}
+
+#text {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  color: #666;
 }

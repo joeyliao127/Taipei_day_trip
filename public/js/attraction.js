@@ -26,6 +26,7 @@ async function init() {
   const quantity = images.length;
   createPoint(quantity);
   listenArrowClick(images, picItem);
+  clickBooking();
 }
 
 init();
@@ -82,4 +83,58 @@ function createPoint(quantity) {
     point.classList.add("point-item");
     pointCtn.appendChild(point);
   }
+}
+
+function clickBooking() {
+  const token = localStorage.getItem("token");
+  const bookingBtn = document.querySelector("#order-form button");
+  bookingBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
+    if (token == null) {
+      const signinArea = document.querySelector(".signin-area");
+      signinArea.classList.toggle("none");
+    }
+    const dateElement = document.querySelector("#date");
+    const date = dateElement.value;
+    if (!date) {
+      const alert = document.querySelector(".date-ctn span");
+      console.log("alert", alert);
+      alert.setAttribute("style", "color: red");
+      alert.textContent = "(請填寫日期)";
+      return 0;
+    }
+    const url = window.location.href;
+    const temp = url.split("/");
+    const attractionId = parseInt(temp[temp.length - 1]);
+    const morning = document.querySelector("#morning");
+    const afternoon = document.querySelector("#afternoon");
+    let time;
+    if (morning.checked) {
+      time = "morning";
+    } else if (afternoon.checked) {
+      time = "afternoon";
+    }
+    const priceElement = document.querySelector("#price");
+    const price = priceElement.textContent;
+    // console.log(
+    //   `提交的資訊為：\natt-id:${attractionId}\ndate:${date}\ntime:${time}\nprice:${price}}`
+    // );
+    const response = await fetch("/api/booking", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+      body: JSON.stringify({
+        attractionId: attractionId,
+        date: date,
+        time: time,
+        price: price,
+      }),
+    });
+    const data = await response.json();
+    if ("ok" in data) {
+      window.location.href = "/booking";
+    }
+  });
 }
