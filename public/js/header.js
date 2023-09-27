@@ -42,7 +42,7 @@ async function checkUserStatus() {
 }
 
 async function getUserData(token) {
-  const response = await fetch("http://127.0.0.1:3000/api/user/auth", {
+  const response = await fetch("/api/user/auth", {
     method: "GET",
     headers: {
       Authorization: "Bearer " + token,
@@ -108,7 +108,7 @@ function clickSigin() {
       return 0;
     }
 
-    const response = await fetch("http://127.0.0.1:3000/api/user/auth", {
+    const response = await fetch("/api/user/auth", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

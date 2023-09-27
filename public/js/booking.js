@@ -41,10 +41,6 @@ function disableForm(name) {
 async function createDetailCtn(data) {
   let { attraction, date, time, price } = data["data"];
   let { id, name, address, image } = attraction;
-
-  //   console.log(
-  //     `所有的資訊：date:\n${date}\ntime:${time}\nprice:${price}\nid:${id}\nname:${name}\naddress:${address}\nimage:${image}`
-  //   );
   const wrapper = document.querySelector(".booking-wrapper");
   const detailCtn = document.createElement("div");
   detailCtn.classList.add("detail-ctn");
