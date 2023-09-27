@@ -21,13 +21,6 @@ async function init() {
 init();
 
 function disableForm(name) {
-  const userInfoForm = document.querySelector(".userInfo");
-  const cardInfoForm = document.querySelector(".cardInfo");
-  const confirm = document.querySelector(".confirm");
-  console.log(userInfoForm, cardInfoForm, confirm);
-  userInfoForm.setAttribute("style", "display: none");
-  cardInfoForm.setAttribute("style", "display: none");
-  confirm.setAttribute("style", "display: none");
   const h2 = document.querySelector(".welcomeMsg");
   h2.textContent = `您好，${name}，待預定的行程如下：`;
   const wrapper = document.querySelector(".booking-wrapper");
@@ -79,6 +72,13 @@ async function createDetailCtn(data) {
   wrapper.appendChild(detailCtn);
   const setPrice = document.querySelector("#price");
   setPrice.textContent = price;
+  const userInfoForm = document.querySelector(".userInfo");
+  const cardInfoForm = document.querySelector(".cardInfo");
+  const confirm = document.querySelector(".confirm");
+  console.log(userInfoForm, cardInfoForm, confirm);
+  userInfoForm.setAttribute("style", "display: block");
+  cardInfoForm.setAttribute("style", "display: block");
+  confirm.setAttribute("style", "display: block");
 }
 
 async function decodeToken() {
