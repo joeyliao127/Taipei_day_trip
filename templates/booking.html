@@ -1,0 +1,71 @@
+{% extends "base.html" %} {% block style %}
+<link rel="stylesheet" href="/style/booking/booking.css" />
+<title>Booking</title>
+{% endblock %}{%block main%}
+<main>
+  <section class="booking-wrapper wrapper">
+    <h2 class="welcomeMsg">
+      您好，<span id="username"></span>待預定的行程如下：
+    </h2>
+    <!-- <div class="detail-ctn">
+      <div class="att-img">
+        <img src="/pic/test.jpeg" alt="test-img" />
+      </div>
+      <div class="att-info">
+        <h2>台北一日遊：</h2>
+        <p>日期：</p>
+        <p>時間：</p>
+        <p>費用：新台幣元</p>
+        <p>地點：</p>
+        <img src="/pic/delete.png" alt="delete icon" id="del-icon" />
+      </div>
+    </div> -->
+  </section>
+
+  <div class="userInfo input-wrapper wrapper" style="display: none">
+    <h2>您的聯絡資訊</h2>
+    <div class="input-item">
+      <label for="name">聯絡姓名：</label>
+      <input type="text" name="name" id="name" />
+    </div>
+    <div class="input-item">
+      <label for="email">連絡信箱： </label>
+      <input type="email" name="email" id="email" />
+    </div>
+    <div class="input-item">
+      <label for="phoneNumber">手機號碼：</label>
+      <input type="text" name="phoneNumber" id="phoneNumber" />
+    </div>
+
+    <p>
+      請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。
+    </p>
+  </div>
+  <div class="cardInfo input-wrapper wrapper" style="display: none">
+    <h2>信用卡付款資訊</h2>
+    <div class="input-item">
+      <label for="card-id">卡片號碼：</label>
+      <input
+        type="text"
+        name="card-id"
+        id="card-id"
+        placeholder="**** **** **** ****"
+      />
+    </div>
+    <div class="input-item">
+      <label for="exp">過期時間：</label>
+      <input type="text" name="exp" id="exp" placeholder="MM/YY" />
+    </div>
+    <div class="input-item">
+      <label for="verify">驗證密碼：</label>
+      <input type="text" name="verify" id="verify" placeholder="CVV" />
+    </div>
+  </div>
+  <div class="confirm wrapper" style="display: none">
+    <p>總價：新台幣<span id="price"></span>元</p>
+    <button>確認訂購並付款</button>
+  </div>
+</main>
+<script src="/js/header.js"></script>
+<script src="/js/booking.js"></script>
+{% endblock %}

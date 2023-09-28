@@ -4,6 +4,7 @@ header {
   align-items: center;
   position: fixed;
   background-color: white;
+  border-bottom: 1px solid #eeeeee;
   top: 0;
   width: 100vw;
   z-index: 5;
@@ -153,4 +154,18 @@ header {
 
 .none {
   display: none;
+}
+
+footer {
+  background-color: #757575;
+  display: flex;
+  padding: 40px 0;
+}
+footer p {
+  margin: 0 auto;
+  font-family: "Noto Sans TC";
+  padding: 5px 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
 }/*# sourceMappingURL=header.css.map */

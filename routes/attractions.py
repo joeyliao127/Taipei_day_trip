@@ -25,20 +25,16 @@ def api_mrts():
 def attraction_page():
 	page = int(request.args.get("page", "0"))
 	keyword = request.args.get("keyword", None)
-	print(f"page = {page}, keyword = {keyword}")
 	data = get_data.get_attractions(page, keyword)
 	if("data" in data and data["data"]):
 		all_page = int(data["count"]) // 12 - 1
 		mod = int(data["count"]) % 12
-		print(f"all page = {all_page}")
-		print(f"all page mod = {mod}")
 		if(mod):
 			all_page += 1
 		if(page < all_page):
 			next_page = page + 1
 		else:
 			next_page = None
-		print("查詢筆數：", len(data["data"]))
 		for attraction in data["data"]:
 			attraction["images"] = get_data.get_image(attraction["id"])
 
@@ -46,7 +42,6 @@ def attraction_page():
 			"nextPage": next_page,
 			"data": data["data"]
 		}	
-		# print(f"return data:\n{return_data}")
 
 		return json.dumps(return_data, ensure_ascii=False),200,{'Content-Type': "application/json; charset=utf-8"}
 
@@ -67,12 +62,10 @@ def attraction_page():
 def api_attractions(attractionId):
 	id = int(attractionId)
 	data = get_data.get_one_attraction(id)
-	print(f"========================/attractions/<id> route的return data:============================\n{data}")
 	if(not data):
 		return json.dumps({"error": True,"message":"景點編號不正確"}, ensure_ascii=False),400,{'Content-Type': "application/json; charset=utf-8"}
 
 	if("error" in data):
 		return json.dumps({"error": True, "message": data["error"]}, ensure_ascii=False),500,{'Content-Type': "application/json; charset=utf-8"}
 	elif("data" in data):
-		print("/att/id回傳的data:\n",data)
 		return json.dumps(data, ensure_ascii=False),200,{'Content-Type': "application/json; charset=utf-8"}
