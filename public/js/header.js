@@ -60,7 +60,8 @@ function clickSignout() {
   navMsg.textContent = "登出系統";
   navItem.addEventListener("click", () => {
     localStorage.removeItem("token");
-    window.location.href = "/";
+    const currentURL = window.location.href;
+    window.location.href = currentURL;
   });
 }
 

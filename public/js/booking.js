@@ -117,7 +117,7 @@ function deleteOrder() {
     });
     const result = await response.json();
     if ("ok" in result) {
-      window.location.href = "/";
+      window.location.href = "/booking";
     }
   });
 }
