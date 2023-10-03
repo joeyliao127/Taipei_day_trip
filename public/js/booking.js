@@ -5,17 +5,20 @@ async function init() {
     window.location.href = "/";
   }
   const userData = await decodeToken(bookingToken);
-  const { name } = userData["data"];
+  const { name, id, email } = userData["data"];
   const h2 = document.querySelector("#username");
   h2.textContent = name;
   const data = await getOrderInfo();
-  console.log(`data = ${data}`);
   if (data == false) {
     disableForm(name);
   } else {
     await createDetailCtn(data);
     deleteOrder();
   }
+  setInputDefaultValue(name, email);
+  listenInputEvent();
+  checkCardInput();
+  setPayment(name, id, email, data);
 }
 
 init();
@@ -75,7 +78,6 @@ async function createDetailCtn(data) {
   const userInfoForm = document.querySelector(".userInfo");
   const cardInfoForm = document.querySelector(".cardInfo");
   const confirm = document.querySelector(".confirm");
-  console.log(userInfoForm, cardInfoForm, confirm);
   userInfoForm.setAttribute("style", "display: flex");
   cardInfoForm.setAttribute("style", "display: flex");
   confirm.setAttribute("style", "display: flex");
@@ -120,4 +122,11 @@ function deleteOrder() {
       window.location.href = "/booking";
     }
   });
+}
+
+function setInputDefaultValue(name, email) {
+  const inputName = document.querySelector("#name");
+  const inputEmail = document.querySelector("#email");
+  inputName.value = name;
+  inputEmail.value = email;
 }

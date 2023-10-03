@@ -1,4 +1,5 @@
 {% extends "base.html" %} {% block style %}
+<link rel="stylesheet" href="/style/booking/card.css" />
 <link rel="stylesheet" href="/style/booking/booking.css" />
 <title>Booking</title>
 {% endblock %}{%block main%}
@@ -7,19 +8,6 @@
     <h2 class="welcomeMsg">
       您好，<span id="username"></span>待預定的行程如下：
     </h2>
-    <!-- <div class="detail-ctn">
-      <div class="att-img">
-        <img src="/pic/test.jpeg" alt="test-img" />
-      </div>
-      <div class="att-info">
-        <h2>台北一日遊：</h2>
-        <p>日期：</p>
-        <p>時間：</p>
-        <p>費用：新台幣元</p>
-        <p>地點：</p>
-        <img src="/pic/delete.png" alt="delete icon" id="del-icon" />
-      </div>
-    </div> -->
   </section>
 
   <div class="userInfo input-wrapper wrapper" style="display: none">
@@ -27,14 +15,17 @@
     <div class="input-item">
       <label for="name">聯絡姓名：</label>
       <input type="text" name="name" id="name" />
+      <span></span>
     </div>
     <div class="input-item">
       <label for="email">連絡信箱： </label>
       <input type="email" name="email" id="email" />
+      <span></span>
     </div>
     <div class="input-item">
       <label for="phoneNumber">手機號碼：</label>
-      <input type="text" name="phoneNumber" id="phoneNumber" />
+      <input type="text" name="phoneNumber" id="phoneNumber" maxlength="10" />
+      <span></span>
     </div>
 
     <p>
@@ -44,28 +35,41 @@
   <div class="cardInfo input-wrapper wrapper" style="display: none">
     <h2>信用卡付款資訊</h2>
     <div class="input-item">
-      <label for="card-id">卡片號碼：</label>
-      <input
-        type="text"
-        name="card-id"
-        id="card-id"
-        placeholder="**** **** **** ****"
-      />
+      <label for="card-id"
+        >卡片號碼：
+        <div class="TP card-number"></div>
+      </label>
     </div>
     <div class="input-item">
-      <label for="exp">過期時間：</label>
-      <input type="text" name="exp" id="exp" placeholder="MM/YY" />
+      <label for="exp"
+        >過期時間：
+        <div class="TP card-exp"></div>
+      </label>
+
+      <!-- <input type="text" name="exp" id="exp" placeholder="MM/YY" /> -->
     </div>
     <div class="input-item">
-      <label for="verify">驗證密碼：</label>
-      <input type="text" name="verify" id="verify" placeholder="CVV" />
+      <label for="ccv"
+        >驗證密碼：
+        <div class="TP card-ccv"></div>
+      </label>
+
+      <!-- <input type="text" name="ccv" id="ccv" placeholder="後三碼" /> -->
     </div>
   </div>
   <div class="confirm wrapper" style="display: none">
     <p>總價：新台幣<span id="price"></span>元</p>
-    <button>確認訂購並付款</button>
+    <button id="submit-btn" class="submit-btn-disabled">確認訂購並付款</button>
   </div>
 </main>
 <script src="/js/header.js"></script>
+<!-- <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"
+></script> -->
+<script src="https://js.tappaysdk.com/sdk/tpdirect/v5.17.0"></script>
+<script src="/js/payment.js"></script>
 <script src="/js/booking.js"></script>
+
 {% endblock %}
