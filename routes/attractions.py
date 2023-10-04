@@ -4,11 +4,6 @@ from packages import get_data
 
 attractions = Blueprint('attractions', __name__)
 
-@attractions.after_request
-def add_cors_headers(response):
-	response.headers['Access-Control-Allow-Origin'] = "*"
-	return response
-
 @attractions.route("/mrts")
 def api_mrts():
 	result = get_data.get_mrts()

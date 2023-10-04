@@ -83,7 +83,27 @@ def delete(execute_str: str, execute_args: tuple):
         connection.close()
         return True
     
-
+def update(execute_str: str, execute_args: tuple):
+    connection = connectDB()
+    if(not connection):
+        return False
+    cursor = connection.cursor()
+    try:
+        cursor.execute(execute_str, execute_args)
+    except Exception as e:
+        print("更新失敗，錯誤訊息\n",e)
+        return False
+    finally:
+        change_row = cursor.rowcount
+        if(change_row == 0):
+            print("更新失敗，尚未找到符合條件的目標。")
+            return False
+        connection.commit()
+        print("更新成功！")
+        cursor.close()
+        connection.close()
+        return True
+        
 if __name__ == '__main__':
     pass
 

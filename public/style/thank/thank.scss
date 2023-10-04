@@ -1,0 +1,52 @@
+* {
+  box-sizing: border-box;
+  color: #555;
+  font-weight: 500;
+}
+
+.order-ctn {
+  max-width: 460px;
+  margin: 100px auto 80px auto;
+  padding: 30px 30px;
+  border: 3px solid #448899;
+  border-radius: 10px;
+  h2 {
+    text-align: center;
+    font-size: 20px;
+    color: #448899;
+    font-weight: 700;
+    padding-bottom: 15px;
+  }
+  div {
+    border: 2px solid #448899;
+    border-radius: 10px;
+    padding: 10px 15px;
+    span {
+      color: #222;
+    }
+  }
+  a {
+    margin: auto;
+    text-decoration: none;
+    background-color: #448899;
+    color: white;
+    border: 2px solid #448899;
+    border-radius: 10px;
+    padding: 10px;
+    transition: 0.3s all ease-in-out;
+    &:hover {
+      background-color: white;
+      color: #448899;
+    }
+  }
+}
+.flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 15px;
+}
+
+#payment {
+  color: green;
+}

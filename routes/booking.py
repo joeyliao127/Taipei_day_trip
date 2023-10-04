@@ -6,9 +6,6 @@ from packages import jwt_token
 bookings = Blueprint('booking', __name__)
 content_type = {'Content-Type': "application/json; charset=utf-8"}
 
-def get():
-    pass
-
 @bookings.route("/booking", methods=["GET", "POST", "DELETE"])
 def booking():
     auth_header = request.headers.get("Authorization", None)
@@ -18,9 +15,14 @@ def booking():
     
     data = auth_header.split(" ");
     token = data[1];
-    print("booking route: token = ", token)
-    userData = jwt_token.decode_jwt_token(token)
-    print("booking route decode token: ", userData)
+    try:
+        userData = jwt_token.decode_jwt_token(token)            
+    except Exception as ex:
+        print(f"decode失敗，錯誤訊息\n", ex)
+        return json.dumps({"error": True, "message": "invalid token"}, ensure_ascii = False), 403, content_type
+    finally:
+        print("decode token accomplish")
+
     email = userData.get("email", None)
 
     if(request.method == "GET"):
