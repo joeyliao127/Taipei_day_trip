@@ -53,6 +53,8 @@ function setPayment(name, id, email, data) {
   });
 
   submitBtn.addEventListener("click", (e) => {
+    submitBtn.disabled = true;
+    disabledBtn();
     e.preventDefault();
     TPDirect.card.getPrime(async function (result) {
       if (result.status !== 0) {
@@ -75,7 +77,6 @@ function setPayment(name, id, email, data) {
         },
         contact,
       };
-
       console.log(`obj = ${obj}`);
       console.log(obj);
       const response = await fetch("/api/orders", {
@@ -84,8 +85,10 @@ function setPayment(name, id, email, data) {
           "Content-Type": "application/json",
           Authorization: "Bearer " + token,
         },
-        body: obj,
+        body: JSON.stringify(obj),
       });
+      const json_data = await response.json();
+      window.location.href = `/thankyou?number=${json_data.data.number}`;
     });
   });
 }
@@ -213,13 +216,3 @@ function getUserInputValue() {
   };
   return contact;
 }
-
-// if (inputStatus.email && inputStatus.name && inputStatus.phone) {
-//   console.log(`所有input皆為true`);
-//   checkUserInput = true;
-// } else {
-//   console.log(
-//     `有某個input為false： name = ${inputStatus.name}, email = ${inputStatus.email}, phone = ${inputStatus.phone}`
-//   );
-// }
-// console.log(`執行card檢查`);

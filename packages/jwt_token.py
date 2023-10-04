@@ -12,3 +12,5 @@ def generate_jwt_token(payload):
 def decode_jwt_token(token):
     data = jwt.decode(token, secret_key["jwt_key"], algorithms="HS256")
     return data
+
+#decode後的格式：{'id': 5, 'name': 'aaa', 'email': 'aaa@aqua.com', 'exp': 1696972118}
