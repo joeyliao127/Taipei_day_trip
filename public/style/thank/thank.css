@@ -1,1 +1,53 @@
-/*# sourceMappingURL=thank.css.map */
+* {
+  box-sizing: border-box;
+  color: #555;
+  font-weight: 500;
+}
+
+.order-ctn {
+  max-width: 460px;
+  margin: 100px auto 80px auto;
+  padding: 30px 30px;
+  border: 3px solid #448899;
+  border-radius: 10px;
+}
+.order-ctn h2 {
+  text-align: center;
+  font-size: 20px;
+  color: #448899;
+  font-weight: 700;
+  padding-bottom: 15px;
+}
+.order-ctn div {
+  border: 2px solid #448899;
+  border-radius: 10px;
+  padding: 10px 15px;
+}
+.order-ctn div span {
+  color: #222;
+}
+.order-ctn a {
+  margin: auto;
+  text-decoration: none;
+  background-color: #448899;
+  color: white;
+  border: 2px solid #448899;
+  border-radius: 10px;
+  padding: 10px;
+  transition: 0.3s all ease-in-out;
+}
+.order-ctn a:hover {
+  background-color: white;
+  color: #448899;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 15px;
+}
+
+#payment {
+  color: green;
+}/*# sourceMappingURL=thank.css.map */
